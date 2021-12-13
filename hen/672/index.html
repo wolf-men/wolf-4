@@ -1,0 +1,19 @@
+<html manifest="Cache.manifest"><link rel="stylesheet prefetch" href="Style.css"><div id="ScrOverlay" class="cacheUPDbg"><pre id="cacheUPDtxt" class="cacheUPD"></pre><div id="CacheProgress"><div id="CacheBar"></div></div></div>
+<script>
+function DLProgress(e){
+	parent.ScrOverlay.style.display="block";
+	Percent=(Math.round(e.loaded / e.total * 100));
+	parent.cacheUPDtxt.innerHTML="Installing Offline Cache: " + Percent + "%";
+	parent.CacheBar.style.width=Percent + '%';
+}
+function DisplayCacheProgress(){
+	setTimeout(function(){parent.cacheUPDtxt.innerHTML="Cache Installed Successfully.Turn off Internet & Reopen the Browser!!";},1000);}
+	window.applicationCache.addEventListener("progress",DLProgress,false);
+	window.applicationCache.oncached=function(e){DisplayCacheProgress();};
+	window.applicationCache.onupdateready=function(e){DisplayCacheProgress();};
+	window.applicationCache.onerror=function(e){parent.cacheUPDtxt.innerHTML="Error Installing Cache";};
+	window.applicationCache.onnoupdate=function(){window.location.replace("1-index.html");};
+    window.applicationCache.onerror=function(){window.location.replace("1-index.html");};
+</script>
+</head>
+<body>
